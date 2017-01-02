@@ -1,5 +1,5 @@
-# Shengnian UI
-A Component Library for React
+# React Redux Starter for webpack 2
+This starter is base on davezuko's see more infomation: [react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit)
 
 ## Table of Contents
 1. [Features](#features)
