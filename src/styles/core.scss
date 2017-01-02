@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+@import 'base';
+
+html {
+  -ms-overflow-style: scrollbar;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent
+}
+
+.container-fluid {
+  padding-right: 0;
+  padding-left: 0
+}
+
+input {
+  transition: border 0s linear !important;
+}
+
+textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="email"]:focus, input[type="search"]:focus, a:focus, .btn:focus {
+  outline: none;
+  box-shadow: none
+}
+
+b {
+  font-weight: bold;
+}
+
+a:hover, a:focus {
+  text-decoration: none
+}
+
