@@ -17,10 +17,6 @@ const karmaConfig = {
   singleRun     : !argv.watch,
   frameworks    : ['mocha'],
   reporters     : ['mocha'],
-  plugins: [ 'karma-chrome-launcher', 'karma-mocha',
-    'karma-sourcemap-loader', 'karma-webpack', 'karma-coverage',
-    'karma-mocha-reporter'
-  ],
   preprocessors : {
     [`${project.dir_test}/test-bundler.js`] : ['webpack', 'sourcemap']
   },
@@ -67,10 +63,8 @@ if (project.globals.__COVERAGE__) {
   karmaConfig.webpack.module.rules.push({
     test    : /\.(js|jsx)$/,
     enforce: 'pre',
-    include : [
-      new RegExp(project.dir_client)
-    ],
-    exclude : /node_modules/,
+    include : new RegExp(project.dir_client),
+    // exclude : /node_modules/,
     loader  : 'babel-loader',
     query   : Object.assign({}, project.compiler_babel, {
       plugins : (project.compiler_babel.plugins || []).concat('istanbul')

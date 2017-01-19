@@ -20,7 +20,7 @@ const webpackConfig = {
       project.paths.client(),
       'node_modules'
     ],
-    extensions: ['.js', '.jsx', '.json']
+    extensions: ['.js', '.jsx', '.json', '.scss', '.css']
   },
   module: {}
 }
@@ -198,7 +198,29 @@ webpackConfig.module.rules.push({
     'style-loader',
     BASE_CSS_LOADER,
     {
-      loader: 'postcss-loader'
+      loader: 'postcss-loader',
+      options: {
+        plugins: function () {
+          return [
+            require('cssnano')({
+              autoprefixer: {
+                add: true,
+                remove: true,
+                browsers: ['last 2 versions']
+              },
+              discardComments: {
+                removeAll: true
+              },
+              discardUnused: false,
+              mergeIdents: false,
+              reduceIdents: false,
+              safe: true,
+              sourcemap: true
+            })
+          ]
+        },
+        sourceMap: 'inline'
+      },
     }
   ]
 })
