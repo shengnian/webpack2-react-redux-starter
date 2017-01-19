@@ -158,29 +158,29 @@ webpackConfig.module.rules.push({
     'style-loader',
     BASE_CSS_LOADER,
     {
-      loader: 'postcss-loader' // ,
-      // options: {
-      //   plugins: function () {
-      //     return [
-      //       require('cssnano')({
-      //         autoprefixer: {
-      //           add: true,
-      //           remove: true,
-      //           browsers: ['last 2 versions']
-      //         },
-      //         discardComments: {
-      //           removeAll: true
-      //         },
-      //         discardUnused: false,
-      //         mergeIdents: false,
-      //         reduceIdents: false,
-      //         safe: true,
-      //         sourcemap: true
-      //       })
-      //     ]
-      //   },
-      //   sourceMap: 'inline'
-      // },
+      loader: 'postcss-loader',
+      options: {
+        plugins: function () {
+          return [
+            require('cssnano')({
+              autoprefixer: {
+                add: true,
+                remove: true,
+                browsers: ['last 2 versions']
+              },
+              discardComments: {
+                removeAll: true
+              },
+              discardUnused: false,
+              mergeIdents: false,
+              reduceIdents: false,
+              safe: true,
+              sourcemap: true
+            })
+          ]
+        },
+        sourceMap: 'inline'
+      },
     },
     // 'sass-loader?sourceMap'
     {
