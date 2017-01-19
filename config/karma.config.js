@@ -40,13 +40,14 @@ const karmaConfig = {
         }
       ])
     },
+    externals : webpackConfig.externals
         // Enzyme fix, see:
         // https://github.com/airbnb/enzyme/issues/47
-    externals : Object.assign({}, webpackConfig.externals, {
-      'react/addons'                   : true,
-      'react/lib/ExecutionEnvironment' : true,
-      'react/lib/ReactContext'         : 'window'
-    })// ,
+    // externals : Object.assign({}, webpackConfig.externals, {
+    //   'react/addons'                   : true,
+    //   'react/lib/ExecutionEnvironment' : true,
+    //   'react/lib/ReactContext'         : 'window'
+    // })// ,
         // sassLoader : webpackConfig.sassLoader
   },
   webpackMiddleware : {
@@ -64,7 +65,7 @@ if (project.globals.__COVERAGE__) {
     test    : /\.(js|jsx)$/,
     enforce: 'pre',
     include : new RegExp(project.dir_client),
-    // exclude : /node_modules/,
+    exclude : /node_modules/,
     loader  : 'babel-loader',
     query   : Object.assign({}, project.compiler_babel, {
       plugins : (project.compiler_babel.plugins || []).concat('istanbul')
