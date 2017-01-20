@@ -10,6 +10,7 @@ debug('Creating default configuration.')
 // ========================================================
 const config = {
   env : process.env.NODE_ENV || 'development',
+  env_electron : process.env.NODE_ELECTRON,
 
     // ----------------------------------
     // Project Structure
@@ -33,7 +34,7 @@ const config = {
   compiler_babel : {
     cacheDirectory : true,
     plugins        : ['transform-runtime'],
-    presets        : [[ 'es2015', { modules: false } ], 'react', 'stage-0']
+    presets        : [[ 'es2015', { 'modules': false } ], 'react', 'stage-0']
   },
   compiler_devtool         : 'source-map',
   compiler_hash_type       : 'hash',
@@ -80,6 +81,7 @@ config.globals = {
   '__DEV__'      : config.env === 'development',
   '__PROD__'     : config.env === 'production',
   '__TEST__'     : config.env === 'test',
+  '__ELECTRON__' : config.env_electron === 'electron',
   '__COVERAGE__' : !argv.watch && config.env === 'test',
   '__BASENAME__' : JSON.stringify(process.env.BASENAME || '')
 }

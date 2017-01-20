@@ -1,6 +1,6 @@
 const argv = require('yargs').argv
 const webpack = require('webpack')
-const cssnano = require('cssnano')
+// const cssnano = require('cssnano')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const project = require('./project.config')
@@ -9,6 +9,7 @@ const debug = require('debug')('app:config:webpack')
 const __DEV__ = project.globals.__DEV__
 const __PROD__ = project.globals.__PROD__
 const __TEST__ = project.globals.__TEST__
+const __ELECTRON__ = project.globals.__ELECTRON__
 
 debug('Creating configuration.')
 const webpackConfig = {
@@ -42,7 +43,7 @@ webpackConfig.entry = {
 webpackConfig.output = {
   filename: `[name].[${project.compiler_hash_type}].js`,
   path: project.paths.dist(),
-  publicPath: project.compiler_public_path
+  publicPath: __ELECTRON__ ? project.paths.dist() : project.compiler_public_path
 }
 
 // ------------------------------------
@@ -70,7 +71,9 @@ webpackConfig.plugins = [
     filename: 'index.html',
     inject: 'body',
     minify: {
-      collapseWhitespace: true
+      collapseWhitespace: true,
+      removeComments: true,
+      removeAttributeQuotes: true
     }
   })
 ]
@@ -98,10 +101,10 @@ if (__DEV__) {
       // new webpack.NoErrorsPlugin()
   )
 } else if (__PROD__) {
-  debug('Enabling plugins for production (OccurenceOrder, Dedupe & UglifyJS).')
+  debug('Enabling plugins for production (UglifyJS).')
   webpackConfig.plugins.push(
       // new webpack.optimize.OccurrenceOrderPlugin(),
-      new webpack.optimize.DedupePlugin(),
+      // new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin({
         compress: {
           unused: true,
@@ -149,6 +152,24 @@ webpackConfig.module.rules = [{
 // css-loader not to duplicate minimization.
 const BASE_CSS_LOADER = 'css-loader?sourceMap&-minimize'
 
+const POSTCSS = [
+  require('cssnano')({
+    autoprefixer: {
+      add: true,
+      remove: true,
+      browsers: ['last 2 versions']
+    },
+    discardComments: {
+      removeAll: true
+    },
+    discardUnused: false,
+    mergeIdents: false,
+    reduceIdents: false,
+    safe: true,
+    sourcemap: true
+  })
+]
+
 // webpackConfig.module.loaders.push({
 webpackConfig.module.rules.push({
   test: /\.scss$/,
@@ -161,26 +182,10 @@ webpackConfig.module.rules.push({
       loader: 'postcss-loader',
       options: {
         plugins: function () {
-          return [
-            require('cssnano')({
-              autoprefixer: {
-                add: true,
-                remove: true,
-                browsers: ['last 2 versions']
-              },
-              discardComments: {
-                removeAll: true
-              },
-              discardUnused: false,
-              mergeIdents: false,
-              reduceIdents: false,
-              safe: true,
-              sourcemap: true
-            })
-          ]
+          return POSTCSS
         },
         sourceMap: 'inline'
-      },
+      }
     },
     // 'sass-loader?sourceMap'
     {
@@ -201,26 +206,10 @@ webpackConfig.module.rules.push({
       loader: 'postcss-loader',
       options: {
         plugins: function () {
-          return [
-            require('cssnano')({
-              autoprefixer: {
-                add: true,
-                remove: true,
-                browsers: ['last 2 versions']
-              },
-              discardComments: {
-                removeAll: true
-              },
-              discardUnused: false,
-              mergeIdents: false,
-              reduceIdents: false,
-              safe: true,
-              sourcemap: true
-            })
-          ]
+          return POSTCSS
         },
         sourceMap: 'inline'
-      },
+      }
     }
   ]
 })
@@ -285,27 +274,26 @@ webpackConfig.module.rules.push(
 if (!__DEV__) {
   debug('Applying ExtractTextPlugin to CSS loaders.')
   webpackConfig.module.rules.filter(
-      (rule) => rule.use && rule.use.find((name) => {
-        if (typeof name === 'object') {
-          name = name.loader
-        }
-        // else if (typeof name == 'string') {
-        //   /css-loader/.test(name.split('?')[0])
-        // }
-        return /css-loader/.test(name.split('?')[0])
-      })
+      (rule) => {
+        let bool = rule.use && rule.use.find((name) => {
+          if (Object.prototype.toString.call(name) === '[object Object]') {
+            name = name.loader
+          }
+          return /css-loader/.test(name.split('?')[0])
+        })
+        return bool
+      }
   ).forEach((rule) => {
-    // debug('==========================: %O', rule)
     let loaders = []
-    if (typeof rule.use === 'object') {
-      loaders.push(rule.use.loader)
-    } else {
-      loaders.push(rule.use)
-    }
+    rule.use.forEach((use) => {
+      if (Object.prototype.toString.call(use) === '[object Object]') {
+        loaders.push(use.loader)
+      } else {
+        loaders.push(use)
+      }
+    })
     const first = loaders[0]
-    // debug('first use:' + first)
     const rest = loaders.slice(1)
-    // debug('rest use: ' + rest)
     rule.loader = ExtractTextPlugin.extract({
       fallbackLoader: first,
       loader: rest.join('!')
@@ -318,37 +306,15 @@ if (!__DEV__) {
       new ExtractTextPlugin({
         fileName: '[name].[contenthash].css',
         allChunks: true
-      }),
+      })
       // new ExtractTextPlugin('[name].[contenthash].css', {
       //     allChunks : true
       // })
-      new webpack.LoaderOptionsPlugin({
-        options: {
-          sassLoader: {
-            includePaths: [project.paths.client('styles')]
-          },
-          postcss: function () {
-            return [
-              cssnano({
-                autoprefixer: {
-                  add: true,
-                  remove: true,
-                  browsers: ['last 2 versions']
-                },
-                discardComments: {
-                  removeAll: true
-                },
-                discardUnused: false,
-                mergeIdents: false,
-                reduceIdents: false,
-                safe: true,
-                sourcemap: true
-              })
-            ]
-          }
-        }
-      })
   )
+}
+
+if (__ELECTRON__) {
+  webpackConfig.plugins.push(new webpack.IgnorePlugin(new RegExp('^(fs|ipc)$')))
 }
 
 module.exports = webpackConfig
