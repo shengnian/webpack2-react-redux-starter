@@ -304,7 +304,7 @@ if (!__DEV__) {
 
   webpackConfig.plugins.push(
       new ExtractTextPlugin({
-        fileName: 'styles.css',
+        fileName: '[name].[contenthash].css',
         allChunks: true
       })
       // new ExtractTextPlugin('[name].[contenthash].css', {
