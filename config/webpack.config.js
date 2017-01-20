@@ -150,7 +150,7 @@ webpackConfig.module.rules = [{
 // ------------------------------------
 // We use cssnano with the postcss loader, so we tell
 // css-loader not to duplicate minimization.
-const BASE_CSS_LOADER = 'css-loader?sourceMap&-minimize'
+const BASE_CSS_LOADER = 'css-loader?importLoaders=1&sourceMap&-minimize'
 
 const POSTCSS = [
   require('cssnano')({
@@ -304,7 +304,7 @@ if (!__DEV__) {
 
   webpackConfig.plugins.push(
       new ExtractTextPlugin({
-        fileName: '[name].[contenthash].css',
+        fileName: 'styles.css',
         allChunks: true
       })
       // new ExtractTextPlugin('[name].[contenthash].css', {
