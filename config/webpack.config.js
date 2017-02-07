@@ -6,10 +6,10 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const project = require('./project.config')
 const debug = require('debug')('app:config:webpack')
 
-const __DEV__ = project.globals.__DEV__
-const __PROD__ = project.globals.__PROD__
-const __TEST__ = project.globals.__TEST__
-const __ELECTRON__ = project.globals.__ELECTRON__
+const __DEV__ = project.compiler_globals.__DEV__
+const __PROD__ = project.compiler_globals.__PROD__
+const __TEST__ = project.compiler_globals.__TEST__
+const __ELECTRON__ = project.compiler_globals.__ELECTRON__
 
 debug('Creating configuration.')
 const webpackConfig = {
@@ -18,7 +18,7 @@ const webpackConfig = {
   devtool: project.compiler_devtool,
   resolve: {
     modules: [
-      project.paths.client(),
+      project.paths.src(),
       'node_modules'
     ],
     extensions: ['.js', '.jsx', '.json', '.scss', '.css']
@@ -28,7 +28,7 @@ const webpackConfig = {
 // ------------------------------------
 // Entry Points
 // ------------------------------------
-const APP_ENTRY = project.paths.client('main.js')
+const APP_ENTRY = project.paths.src('main.js')
 
 webpackConfig.entry = {
   app: __DEV__
@@ -63,9 +63,9 @@ webpackConfig.performance = { hints: false }
 // Plugins
 // ------------------------------------
 webpackConfig.plugins = [
-  new webpack.DefinePlugin(project.globals),
+  new webpack.DefinePlugin(project.compiler_globals),
   new HtmlWebpackPlugin({
-    template: project.paths.client('index.html'),
+    template: project.paths.src('index.html'),
     hash: false,
     favicon: project.paths.public('favicon.ico'),
     filename: 'index.html',
@@ -191,7 +191,7 @@ webpackConfig.module.rules.push({
     {
       loader: 'sass-loader',
       options: {
-        includePaths: [project.paths.client('styles')]
+        includePaths: [project.paths.src('styles')]
       }
     }
   ]

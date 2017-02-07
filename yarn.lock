@@ -2,10 +2,6 @@
 # yarn lockfile v1
 
 
-"7zip@0.0.6":
-  version "0.0.6"
-  resolved "http://registry.npm.taobao.org/7zip/download/7zip-0.0.6.tgz#9cafb171af82329490353b4816f03347aa150a30"
-
 abbrev@1, abbrev@1.0.x:
   version "1.0.9"
   resolved "http://registry.npm.taobao.org/abbrev/download/abbrev-1.0.9.tgz#91b4792588a7738c25f35dd6f63752a2f8776135"
@@ -51,9 +47,9 @@ ajv-keywords@^1.0.0, ajv-keywords@^1.1.1:
   version "1.5.0"
   resolved "http://registry.npm.taobao.org/ajv-keywords/download/ajv-keywords-1.5.0.tgz#c11e6859eafff83e0dafc416929472eca946aa2c"
 
-ajv@^4.7.0:
-  version "4.10.4"
-  resolved "http://registry.npm.taobao.org/ajv/download/ajv-4.10.4.tgz#c0974dd00b3464984892d6010aa9c2c945933254"
+ajv@^4.11.2, ajv@^4.7.0:
+  version "4.11.2"
+  resolved "http://registry.npm.taobao.org/ajv/download/ajv-4.11.2.tgz#f166c3c11cbc6cb9dcc102a5bcfe5b72c95287e6"
   dependencies:
     co "^4.6.0"
     json-stable-stringify "^1.0.1"
@@ -1641,10 +1637,6 @@ cross-spawn@^3.0.0:
     lru-cache "^4.0.1"
     which "^1.2.9"
 
-cross-unzip@0.0.2:
-  version "0.0.2"
-  resolved "http://registry.npm.taobao.org/cross-unzip/download/cross-unzip-0.0.2.tgz#5183bc47a09559befcf98cc4657964999359372f"
-
 cryptiles@2.x.x:
   version "2.0.5"
   resolved "http://registry.npm.taobao.org/cryptiles/download/cryptiles-2.0.5.tgz#3bdfecdc608147c1c67202fa291e7dca59eaa3b8"
@@ -2001,16 +1993,6 @@ editions@^1.1.1:
 ee-first@1.1.1:
   version "1.1.1"
   resolved "http://registry.npm.taobao.org/ee-first/download/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
-
-electron-devtools-installer@^2.0.1:
-  version "2.0.1"
-  resolved "http://registry.npm.taobao.org/electron-devtools-installer/download/electron-devtools-installer-2.0.1.tgz#d52dcb3a430a95b771dc01d8deb13fcbdaa8d13c"
-  dependencies:
-    "7zip" "0.0.6"
-    cross-unzip "0.0.2"
-    request "^2.72.0"
-    rimraf "^2.5.2"
-    semver "^5.3.0"
 
 elliptic@^6.0.0:
   version "6.3.2"
@@ -2456,12 +2438,13 @@ extglob@^0.3.1:
   dependencies:
     is-extglob "^1.0.0"
 
-extract-text-webpack-plugin@^2.0.0-beta.4:
-  version "2.0.0-beta.5"
-  resolved "http://registry.npm.taobao.org/extract-text-webpack-plugin/download/extract-text-webpack-plugin-2.0.0-beta.5.tgz#595e32ae2466ad2129a928328485fcc064ce57f0"
+extract-text-webpack-plugin@^2.0.0-beta.5:
+  version "2.0.0-rc.3"
+  resolved "http://registry.npm.taobao.org/extract-text-webpack-plugin/download/extract-text-webpack-plugin-2.0.0-rc.3.tgz#7381aa7869ce26d4b39a7bab71cf09e5a38432b2"
   dependencies:
+    ajv "^4.11.2"
     async "^2.1.2"
-    loader-utils "^0.2.3"
+    loader-utils "^0.2.16"
     webpack-sources "^0.1.0"
 
 extract-zip@~1.5.0:
@@ -3512,6 +3495,10 @@ karma-phantomjs-launcher@^1.0.2:
     lodash "^4.0.1"
     phantomjs-prebuilt "^2.1.7"
 
+karma-phantomjs-shim@^1.4.0:
+  version "1.4.0"
+  resolved "http://registry.npm.taobao.org/karma-phantomjs-shim/download/karma-phantomjs-shim-1.4.0.tgz#21072f436e07764a425fbbdc15175b537106e7ed"
+
 karma-sourcemap-loader@^0.3.7:
   version "0.3.7"
   resolved "http://registry.npm.taobao.org/karma-sourcemap-loader/download/karma-sourcemap-loader-0.3.7.tgz#91322c77f8f13d46fed062b042e1009d4c4505d8"
@@ -3615,11 +3602,11 @@ load-json-file@^1.0.0:
     pinkie-promise "^2.0.0"
     strip-bom "^2.0.0"
 
-loader-runner@^2.2.0:
-  version "2.2.0"
-  resolved "http://registry.npm.taobao.org/loader-runner/download/loader-runner-2.2.0.tgz#824c1b699c4e7a2b6501b85902d5b862bf45b3fa"
+loader-runner@^2.3.0:
+  version "2.3.0"
+  resolved "http://registry.npm.taobao.org/loader-runner/download/loader-runner-2.3.0.tgz#f482aea82d543e07921700d5a46ef26fdac6b8a2"
 
-loader-utils@0.2.x, loader-utils@^0.2.11, loader-utils@^0.2.15, loader-utils@^0.2.16, loader-utils@^0.2.3, loader-utils@^0.2.5, loader-utils@^0.2.7, loader-utils@~0.2.2, loader-utils@~0.2.5:
+loader-utils@0.2.x, loader-utils@^0.2.11, loader-utils@^0.2.15, loader-utils@^0.2.16, loader-utils@^0.2.5, loader-utils@^0.2.7, loader-utils@~0.2.2, loader-utils@~0.2.5:
   version "0.2.16"
   resolved "http://registry.npm.taobao.org/loader-utils/download/loader-utils-0.2.16.tgz#f08632066ed8282835dff88dfb52704765adee6d"
   dependencies:
@@ -5188,7 +5175,7 @@ request-progress@~2.0.1:
   dependencies:
     throttleit "^1.0.0"
 
-request@2, request@>=2.42.0, request@^2.61.0, request@^2.72.0, request@^2.79.0, request@~2.79.0:
+request@2, request@>=2.42.0, request@^2.61.0, request@^2.79.0, request@~2.79.0:
   version "2.79.0"
   resolved "http://registry.npm.taobao.org/request/download/request-2.79.0.tgz#4dfe5bf6be8b8cdc37fcf93e04b65577722710de"
   dependencies:
@@ -5257,7 +5244,7 @@ right-align@^0.1.1:
   dependencies:
     align-text "^0.1.1"
 
-rimraf@2, rimraf@^2.2.8, rimraf@^2.3.3, rimraf@^2.5.2, rimraf@^2.5.4, rimraf@~2.5.1, rimraf@~2.5.4:
+rimraf@2, rimraf@^2.2.8, rimraf@^2.3.3, rimraf@^2.5.4, rimraf@~2.5.1, rimraf@~2.5.4:
   version "2.5.4"
   resolved "http://registry.npm.taobao.org/rimraf/download/rimraf-2.5.4.tgz#96800093cbf1a0c86bd95b4625467535c29dfa04"
   dependencies:
@@ -6055,9 +6042,9 @@ webpack-sources@^0.1.0, webpack-sources@^0.1.4:
     source-list-map "~0.1.7"
     source-map "~0.5.3"
 
-webpack@^2.2.0:
-  version "2.2.0"
-  resolved "http://registry.npm.taobao.org/webpack/download/webpack-2.2.0.tgz#09246336b5581c9002353f75bcadb598a648f977"
+webpack@^2.2.1:
+  version "2.2.1"
+  resolved "http://registry.npm.taobao.org/webpack/download/webpack-2.2.1.tgz#7bb1d72ae2087dd1a4af526afec15eed17dda475"
   dependencies:
     acorn "^4.0.4"
     acorn-dynamic-import "^2.0.0"
@@ -6067,7 +6054,7 @@ webpack@^2.2.0:
     enhanced-resolve "^3.0.0"
     interpret "^1.0.0"
     json-loader "^0.5.4"
-    loader-runner "^2.2.0"
+    loader-runner "^2.3.0"
     loader-utils "^0.2.16"
     memory-fs "~0.4.1"
     mkdirp "~0.5.0"

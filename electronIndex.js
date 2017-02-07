@@ -1,31 +1,40 @@
 'use strict'
 
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, nativeImage } = require('electron')
+const appIcon = nativeImage.createFromPath('./public/favicon.ico')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
 const isDev = process.env.NODE_ENV === 'development'
+require('babel-polyfill')
 
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 800,
-    height: 600
+    height: 600,
+    icon: appIcon,
+    title: 'webpack2-react-redux-starter'
   })
 
-  // and load the index.html of the app.
-  mainWindow.loadURL(`file://${__dirname}/dist/index.html`)
+
 
   // Open the DevTools.
   if (isDev) {
+
+    // and load the index.html of the app.
+    mainWindow.loadURL(`file://${__dirname}/src/index.html`)
+
     mainWindow.webContents.openDevTools()
 
     const installExtension = require('electron-devtools-installer')
     installExtension.default(installExtension.REACT_DEVELOPER_TOOLS)
       .then(name => console.log(`Added Extension:  ${name}`))
       .catch(err => console.log('An error occurred: ', err))
+  } else {
+    mainWindow.loadURL(`file://${__dirname}/dist/index.html`)
   }
 
   // Emitted when the window is closed.
