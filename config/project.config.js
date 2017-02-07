@@ -22,7 +22,8 @@ let config = {
   // ----------------------------------
   path_base  : path.resolve(__dirname, '..'),
   dir_src : 'src',
-  dir_dist   : 'dist',
+  dir_dist : 'dist',
+  dir_assets: 'assets',
   dir_public : 'public',
   dir_server : 'server',
   dir_test   : 'tests'
@@ -41,7 +42,7 @@ const paths = {
   base   : base,
   src : base.bind(null, config.dir_src),
   public : base.bind(null, config.dir_public),
-  dist   : base.bind(null, config.dir_dist)
+  dist : base.bind(null, config.dir_dist)
 }
 
 config = Object.assign({}, config, {

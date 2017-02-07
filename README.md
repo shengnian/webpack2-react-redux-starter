@@ -27,5 +27,6 @@ This starter is base on davezuko's see more infomation: [react-redux-starter-kit
 $ git clone https://github.com/shengnian/webpack2-react-redux-starter.git <my-project-name>
 $ cd <my-project-name>
 $ yarn install    # Install project dependencies
-$ yarn start      # Compile and launch (same as `npm start`)
+$ yarn start      # Compile and launch (same as `npm start`). The default is: http://localhost:4444.
+$ yarn run electron # Compile and launch electron
 ```

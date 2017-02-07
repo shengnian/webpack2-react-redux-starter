@@ -40,7 +40,7 @@ webpackConfig.entry = {
 // Bundle Output
 // ------------------------------------
 webpackConfig.output = {
-  filename: `[name].[${project.compiler_hash_type}].js`,
+  filename: (`${project.dir_assets}/js/[name].[${project.compiler_hash_type}].js`),
   path: project.paths.dist(),
   publicPath: project.compiler_public_path
 }
@@ -105,10 +105,15 @@ if (__DEV__) {
       // new webpack.optimize.OccurrenceOrderPlugin(),
       // new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin({
+        'screw-ie8': true,
+        sourceMap: true,
         compress: {
           unused: true,
           dead_code: true,
           warnings: false
+        },
+        output: {
+          comments: false
         }
       })
   )
@@ -117,9 +122,15 @@ if (__DEV__) {
 // Don't split bundles during testing, since we only want import one bundle
 if (!__TEST__) {
   webpackConfig.plugins.push(
-      new webpack.optimize.CommonsChunkPlugin({
-        names: ['vendor']
-      })
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['vendor']
+    }),
+    // extract webpack runtime and module manifest to its own file in order to
+    // prevent vendor hash from being updated whenever app bundle is updated
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest',
+      chunks: ['vendor']
+    })
   )
 }
 
@@ -263,15 +274,15 @@ if (!__DEV__) {
     const first = loaders[0]
     const rest = loaders.slice(1)
     rule.loader = ExtractTextPlugin.extract({
-      fallbackLoader: first,
-      loader: rest.join('!')
+      fallback: first,
+      use: rest.join('!')
     })
     delete rule.use
   })
 
   webpackConfig.plugins.push(
       new ExtractTextPlugin({
-        filename: '[name].[contenthash].css',
+        filename: `${project.dir_assets}/css/[name].[contenthash].css`,
         allChunks: true
       })
   )

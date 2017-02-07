@@ -23,8 +23,6 @@
     "lint:fix": "npm run lint -- --fix",
     "start": "better-npm-run start",
     "electron": "better-npm-run electron",
-    "electron:pre": "better-npm-run electron:pre",
-    "electron:dev": "better-npm-run electron:dev",
     "dev": "better-npm-run dev",
     "test": "better-npm-run test",
     "test:dev": "npm run test -- --watch",
@@ -68,21 +66,9 @@
       }
     },
     "electron": {
-      "command": "yarn run compile && electron electronIndex.js",
+      "command": "yarn run deploy:prod && electron electronIndex.js",
       "env": {
-        "NODE_ENV": "development",
-        "DEBUG": "app:*"
-      }
-    },
-    "electron:pre": {
-      "command": "node bin/compile-electron && yarn install",
-      "env": {
-        "DEBUG": "app:*"
-      }
-    },
-    "electron:dev": {
-      "command": "yarn run compile && cp electronIndex.js electron/",
-      "env": {
+        "NODE_ENV": "production",
         "DEBUG": "app:*"
       }
     },
