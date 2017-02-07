@@ -94,7 +94,7 @@ config = Object.assign({}, config, {
   // Environment
   // ------------------------------------
   compiler_globals: {
-    "process.env": {
+    'process.env': {
       NODE_ENV: JSON.stringify(env)
     },
     __DEBUG__: !!argv.debug,

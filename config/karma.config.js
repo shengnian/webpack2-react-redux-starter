@@ -18,7 +18,7 @@ const karmaConfig = {
       included : true
     }
   ],
-  formatError(msg) {
+  formatError (msg) {
     let haveSeenStack = false
     return msg
       .split('\n')
@@ -82,7 +82,7 @@ const karmaConfig = {
     stats: project.compiler_stats,
     debug: true,
     noInfo: false,
-    quiet: false,
+    quiet: false
   },
   coverageReporter : project.coverage_reporters
 }
