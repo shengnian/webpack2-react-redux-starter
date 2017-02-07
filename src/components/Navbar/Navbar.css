@@ -1,0 +1,111 @@
+.navbar-shengnian {
+  position: fixed;
+  width: 45px;
+  z-index: 1049;
+  padding: 0;
+  border-radius: 0;
+  -webkit-backface-visibility: hidden; }
+  .navbar-shengnian a {
+    display: block;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 25px;
+    text-align: center; }
+    .navbar-shengnian a.logo {
+      font-size: 18px;
+      color: white; }
+  .navbar-shengnian i {
+    width: 16px;
+    display: inline-block;
+    text-align: center;
+    line-height: 14px; }
+    .navbar-shengnian i.fa-mobile {
+      position: relative;
+      top: 3px;
+      font-size: 26px; }
+  .navbar-shengnian .nav-user {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-bottom: 5px; }
+    .navbar-shengnian .nav-user a {
+      position: relative;
+      padding: 5px 10px; }
+      .navbar-shengnian .nav-user a:hover, .navbar-shengnian .nav-user a.active {
+        color: #eeeeee; }
+    .navbar-shengnian .nav-user .messages-amount {
+      position: absolute;
+      top: 1px;
+      right: 2px;
+      width: 16px;
+      height: 16px;
+      background: #e78170;
+      border-radius: 50%;
+      color: white;
+      text-shadow: none;
+      text-align: center;
+      font-family: -apple-system, "Helvetica Neue", Arial, "PingFang SC", "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+      font-size: 9px;
+      font-weight: normal;
+      line-height: 15px; }
+    .navbar-shengnian .nav-user span.title {
+      display: none; }
+      @media (min-width: 1588px) {
+        .navbar-shengnian .nav-user span.title {
+          display: inline-block;
+          margin-left: 8px;
+          font-size: 14px;
+          font-weight: normal;
+          line-height: 14px; } }
+
+.expanded {
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: #55595c; }
+  .expanded a {
+    color: #eceeef;
+    text-shadow: 0 1px 0 black; }
+    .expanded a.logo b {
+      font-weight: normal; }
+    .expanded a.logo i {
+      display: none; }
+      @media (min-width: 1588px) {
+        .expanded a.logo i {
+          display: inline-block;
+          margin: 0; } }
+  .expanded .dropdown a:hover, .expanded .dropdown a:active, .expanded .dropdown a.active {
+    background-color: #0275d8;
+    color: white;
+    text-shadow: 0 1px 0 #299bfd; }
+  .expanded .dropdown a:hover {
+    background-color: #014c8c; }
+  .expanded .dropdown a:active {
+    background-color: #299bfd; }
+  .expanded .dropdown span {
+    display: none; }
+
+@media (min-width: 1588px) {
+  .navbar-shengnian {
+    width: 170px; }
+    .navbar-shengnian .dropdown a, .navbar-shengnian .nav-user a {
+      padding: 10px 15px;
+      text-align: left; }
+    .navbar-shengnian .logo b {
+      display: none; }
+    .navbar-shengnian .logo i {
+      display: inline-block;
+      margin: 0; }
+    .navbar-shengnian span.title {
+      display: inline-block;
+      margin-left: 8px;
+      font-size: 14px;
+      font-weight: normal;
+      line-height: 14px; }
+    .navbar-shengnian .nav-user .messages-amount {
+      top: 7px;
+      left: 28px; }
+    .navbar-shengnian .title {
+      padding: 0; } }
+
+/*# sourceMappingURL=Navbar.css.map */

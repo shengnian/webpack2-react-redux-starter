@@ -1,7 +1,7 @@
 {
-  "name": "webpack2-react-redux-starter",
-  "version": "0.0.3",
-  "description": "A webpack2 react redux stater kit",
+  "name": "shengnian-org-react",
+  "version": "0.0.1",
+  "description": "Shengnian.org Website SAP",
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
