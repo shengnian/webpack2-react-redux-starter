@@ -55,18 +55,16 @@ config = Object.assign({}, config, {
     // ----------------------------------
     // Compiler Configuration
     // ----------------------------------
-  compiler_devtool :  __DEV__ && 'cheap-source-map'
-    || __TEST__ && 'cheap-source-map'
-    || __PROD__ && 'source-map',
+  compiler_devtool :  'cheap-source-map',
   compiler_hash_type : 'hash',
   compiler_babel : {
     cacheDirectory : true,
     plugins : ['transform-runtime'],
     presets : [[ 'es2015', { 'modules': false } ], 'react', 'stage-0']
   },
-  compiler_fail_on_warning : __TEST__ || __PROD__ || false,
+  compiler_fail_on_warning : false,
   compiler_quiet : false,
-  compiler_public_path : __PROD__ ? './' : __BASENAME__,
+  compiler_public_path : __BASENAME__,
   compiler_stats : {
     hash: false,            // the hash of the compilation
     version: false,         // webpack version info
@@ -96,10 +94,8 @@ config = Object.assign({}, config, {
   // Environment
   // ------------------------------------
   compiler_globals: {
-    process: {
-      env: {
-        NODE_ENV: JSON.stringify(env),
-      },
+    "process.env": {
+      NODE_ENV: JSON.stringify(env)
     },
     __DEBUG__: !!argv.debug,
     __PATH_SEP__: JSON.stringify(path.sep),

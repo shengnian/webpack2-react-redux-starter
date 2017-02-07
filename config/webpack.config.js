@@ -9,7 +9,6 @@ const debug = require('debug')('app:config:webpack')
 const __DEV__ = project.compiler_globals.__DEV__
 const __PROD__ = project.compiler_globals.__PROD__
 const __TEST__ = project.compiler_globals.__TEST__
-const __ELECTRON__ = project.compiler_globals.__ELECTRON__
 
 debug('Creating configuration.')
 const webpackConfig = {
@@ -43,7 +42,7 @@ webpackConfig.entry = {
 webpackConfig.output = {
   filename: `[name].[${project.compiler_hash_type}].js`,
   path: project.paths.dist(),
-  publicPath: __ELECTRON__ ? project.paths.dist() : project.compiler_public_path
+  publicPath: project.compiler_public_path
 }
 
 // ------------------------------------
@@ -134,16 +133,7 @@ webpackConfig.module.rules = [{
   exclude: /node_modules/,
   loader: 'babel-loader',
   query: project.compiler_babel
-  // exclude: [
-  //   path.resolve(__dirname, "../node_modules/element-ui/lib"),
-  //   new RegExp(`node_modules\\${path.sep}(?!element\-ui.*)`)
-  // ]
-}
-// , {
-//     test   : /\.json$/,
-//     loader : 'json-loader'
-// }
-]
+}]
 
 // ------------------------------------
 // Style Loaders
@@ -214,28 +204,6 @@ webpackConfig.module.rules.push({
   ]
 })
 
-// webpackConfig.sassLoader = {
-//     includePaths : project.paths.client('styles')
-// }
-
-// webpackConfig.postcss = [
-//     cssnano({
-//         autoprefixer : {
-//             add      : true,
-//             remove   : true,
-//             browsers : ['last 2 versions']
-//         },
-//         discardComments : {
-//             removeAll : true
-//         },
-//         discardUnused : false,
-//         mergeIdents   : false,
-//         reduceIdents  : false,
-//         safe          : true,
-//         sourcemap     : true
-//     })
-// ]
-
 // File loaders
 /* eslint-disable */
 // webpackConfig.module.loaders.push(
@@ -298,7 +266,6 @@ if (!__DEV__) {
       fallbackLoader: first,
       loader: rest.join('!')
     })
-    // loader.loader = ExtractTextPlugin.extract(first, rest.join('!'))
     delete rule.use
   })
 
@@ -307,14 +274,11 @@ if (!__DEV__) {
         filename: '[name].[contenthash].css',
         allChunks: true
       })
-      // new ExtractTextPlugin('[name].[contenthash].css', {
-      //     allChunks : true
-      // })
   )
 }
 
-if (__ELECTRON__) {
-  webpackConfig.plugins.push(new webpack.IgnorePlugin(new RegExp('^(fs|ipc)$')))
-}
+// if (__ELECTRON__) {
+//   webpackConfig.plugins.push(new webpack.IgnorePlugin(new RegExp('^(fs|ipc)$')))
+// }
 
 module.exports = webpackConfig
