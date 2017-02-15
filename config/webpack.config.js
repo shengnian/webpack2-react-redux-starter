@@ -17,17 +17,20 @@ const webpackConfig = {
   devtool: project.compiler_devtool,
   resolve: {
     modules: [
-      project.paths.src(),
+      project.paths.base(),
       'node_modules'
     ],
-    extensions: ['.js', '.jsx', '.json', '.scss', '.css']
+    extensions: ['.js', '.jsx', '.scss', '.css'],
+    alias: {
+      'shengnian-ui': project.paths.src('index.js')
+    }
   },
   module: {}
 }
 // ------------------------------------
 // Entry Points
 // ------------------------------------
-const APP_ENTRY = project.paths.src('main.js')
+const APP_ENTRY = project.paths.appSrc('main.js')
 
 webpackConfig.entry = {
   app: __DEV__
@@ -41,8 +44,9 @@ webpackConfig.entry = {
 // ------------------------------------
 webpackConfig.output = {
   filename: (`${project.dir_assets}/js/[name].[${project.compiler_hash_type}].js`),
-  path: project.paths.dist(),
-  publicPath: project.compiler_public_path
+  path: project.paths.appDist(),
+  publicPath: project.compiler_public_path,
+  pathinfo: true
 }
 
 // ------------------------------------
@@ -64,7 +68,7 @@ webpackConfig.performance = { hints: false }
 webpackConfig.plugins = [
   new webpack.DefinePlugin(project.compiler_globals),
   new HtmlWebpackPlugin({
-    template: project.paths.src('index.html'),
+    template: project.paths.appSrc('index.html'),
     hash: false,
     favicon: project.paths.public('favicon.ico'),
     filename: 'index.html',
@@ -171,11 +175,8 @@ const POSTCSS = [
   })
 ]
 
-// webpackConfig.module.loaders.push({
 webpackConfig.module.rules.push({
   test: /\.scss$/,
-  // exclude : null,
-  // loaders : [
   use: [
     'style-loader',
     BASE_CSS_LOADER,
@@ -188,11 +189,10 @@ webpackConfig.module.rules.push({
         sourceMap: 'inline'
       }
     },
-    // 'sass-loader?sourceMap'
     {
       loader: 'sass-loader',
       options: {
-        includePaths: [project.paths.src('styles')]
+        includePaths: [project.paths.src('styles'), project.paths.appSrc('styles')]
       }
     }
   ]
@@ -217,7 +217,6 @@ webpackConfig.module.rules.push({
 
 // File loaders
 /* eslint-disable */
-// webpackConfig.module.loaders.push(
 webpackConfig.module.rules.push(
     {
       test: /\.woff(\?.*)?$/,
@@ -288,8 +287,8 @@ if (!__DEV__) {
   )
 }
 
-// if (__ELECTRON__) {
-//   webpackConfig.plugins.push(new webpack.IgnorePlugin(new RegExp('^(fs|ipc)$')))
-// }
+webpackConfig.module.noParse = [
+  /\.json$/
+]
 
 module.exports = webpackConfig
