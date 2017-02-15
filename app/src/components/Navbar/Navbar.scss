@@ -1,0 +1,180 @@
+@import '../../styles/variables';
+
+// Navbar
+.navbar-shengnian {
+  position: fixed;
+  width: 45px;
+  z-index: 1049;
+  padding: 0;
+  border-radius: 0;
+  -webkit-backface-visibility: hidden;
+
+  a {
+    display: block;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 25px;
+    text-align: center;
+
+    &.logo {
+      font-size: 18px;
+      color: white;
+    }
+  }
+
+  i {
+    width: 16px;
+    display: inline-block;
+    text-align: center;
+    line-height: 14px;
+
+    &.fa-mobile {
+      position: relative;
+      top: 3px;
+      font-size: 26px
+    }
+  }
+
+  .nav-user {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-bottom: 5px;
+
+    a {
+      position: relative;
+      padding: 5px 10px;
+
+      &:hover, &.active {
+        color: #eeeeee;
+      }
+    }
+
+    .messages-amount {
+      position: absolute;
+      top: 1px;
+      right: 2px;
+      width: 16px;
+      height: 16px;
+      background: #e78170;
+      border-radius: 50%;
+      color: white;
+      text-shadow: none;
+      text-align: center;
+      font-family: -apple-system, "Helvetica Neue", Arial, "PingFang SC", "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+      font-size: 9px;
+      font-weight: normal;
+      line-height: 15px;
+    }
+
+    span {
+      &.title {
+        display: none;
+        @media(min-width: $screen-breakpoints-1588) {
+          display: inline-block;
+          margin-left: 8px;
+          font-size: 14px;
+          font-weight: normal;
+          line-height: 14px;
+        }
+
+      }
+    }
+  }
+
+}
+
+.expanded {
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: $gray;
+
+  a {
+    color: $gray-lighter;
+    text-shadow: 0 1px 0 black;
+
+    &.logo {
+      b {
+        font-weight: normal;
+      }
+
+      i {
+        display: none;
+        @media(min-width: $screen-breakpoints-1588) {
+          display: inline-block;
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  %expanded-a-link {
+    background-color: $brand-primary;
+    color: white;
+    text-shadow: 0 1px 0 $brand-primary-active;
+  }
+
+  .dropdown {
+
+    a {
+      &:hover, &:active, &.active {
+        @extend %expanded-a-link;
+      }
+      &:hover {
+        background-color: $brand-primary-hover;
+      }
+
+      &:active {
+        background-color: $brand-primary-active;
+      }
+    }
+
+    span {
+      display: none;
+    }
+  }
+}
+
+@media(min-width: $screen-breakpoints-1588) {
+  .navbar-shengnian {
+    width: 170px;
+
+    .dropdown a, .nav-user a {
+      padding: 10px 15px;
+      text-align: left;
+    }
+
+    .logo {
+      b {
+        display: none;
+      }
+
+      i {
+        display: inline-block;
+        margin: 0;
+      }
+    }
+
+    span {
+      &.title {
+        display: inline-block;
+        margin-left: 8px;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 14px;
+      }
+    }
+
+    .nav-user {
+      .messages-amount {
+        top: 7px;
+        left: 28px;
+      }
+    }
+
+    .title {
+      padding: 0;
+    }
+  }
+}
