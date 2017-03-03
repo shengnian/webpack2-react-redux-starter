@@ -1,5 +1,5 @@
 # React Redux Starter for webpack 2
-This starter is base on davezuko's see more infomation: [react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit)
+This starter kit is base on davezuko's see more: [react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit)
 
 ## Table of Contents
 1. [Features](#features)
@@ -19,7 +19,7 @@ This starter is base on davezuko's see more infomation: [react-redux-starter-kit
 
 ## Requirements
 * node `^4.5.0`
-* yarn `^0.18.0` or npm `^3.0.0`
+* yarn `^0.21.3` or npm `^3.0.0`
 
 ## Getting Started
 
