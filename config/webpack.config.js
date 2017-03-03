@@ -17,7 +17,7 @@ const webpackConfig = {
   devtool: project.compiler_devtool,
   resolve: {
     modules: [
-      project.paths.base(),
+      project.paths.src(),
       'node_modules'
     ],
     extensions: ['.js', '.jsx', '.scss', '.css'],
