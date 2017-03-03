@@ -30,7 +30,7 @@ const webpackConfig = {
 // ------------------------------------
 // Entry Points
 // ------------------------------------
-const APP_ENTRY = project.paths.appSrc('main.js')
+const APP_ENTRY = project.paths.src('main.js')
 
 webpackConfig.entry = {
   app: __DEV__
@@ -44,7 +44,7 @@ webpackConfig.entry = {
 // ------------------------------------
 webpackConfig.output = {
   filename: (`${project.dir_assets}/js/[name].[${project.compiler_hash_type}].js`),
-  path: project.paths.appDist(),
+  path: project.paths.dist(),
   publicPath: project.compiler_public_path,
   pathinfo: true
 }
@@ -68,7 +68,7 @@ webpackConfig.performance = { hints: false }
 webpackConfig.plugins = [
   new webpack.DefinePlugin(project.compiler_globals),
   new HtmlWebpackPlugin({
-    template: project.paths.appSrc('index.html'),
+    template: project.paths.src('index.html'),
     hash: false,
     favicon: project.paths.public('favicon.ico'),
     filename: 'index.html',
@@ -192,7 +192,7 @@ webpackConfig.module.rules.push({
     {
       loader: 'sass-loader',
       options: {
-        includePaths: [project.paths.src('styles'), project.paths.appSrc('styles')]
+        includePaths: [project.paths.src('styles')]
       }
     }
   ]

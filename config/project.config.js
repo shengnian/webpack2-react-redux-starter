@@ -26,10 +26,7 @@ let config = {
   dir_assets: 'assets',
   dir_public : 'public',
   dir_server : 'server',
-  dir_test   : 'tests',
-  dir_app : 'app',
-  dir_app_src : 'app/src',
-  dir_app_dist : 'app/dist'
+  dir_test   : 'tests'
 }
 
 // ------------------------------------
@@ -45,10 +42,7 @@ const paths = {
   base   : base,
   src : base.bind(null, config.dir_src),
   public : base.bind(null, config.dir_public),
-  dist : base.bind(null, config.dir_dist),
-  app : base.bind(null, config.dir_app),
-  appSrc : base.bind(null, config.dir_app_src),
-  appDist : base.bind(null, config.dir_app_dist),
+  dist : base.bind(null, config.dir_dist)
 }
 
 config = Object.assign({}, config, {
